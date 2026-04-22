@@ -4,17 +4,26 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class StoreApp {
     public static void main(String[] args) {
         ArrayList<Product> inventory = getInventory();
+
+        //This will sort the product by name before it is displayed.
+        inventory.sort(Comparator.comparing(Product::getName));
+
+
         System.out.println("We carry the following inventory: ");
         for (int i = 0; i < inventory.size(); i++) {
-            Product p = inventory.get(i);
+            Product p = (inventory.get(i));
             System.out.printf("id: %d %s - Price: $%.2f%n",
                     p.getId(), p.getName(), p.getPrice());
         }
+
+
 
 
 
@@ -56,6 +65,8 @@ public class StoreApp {
                 float hours_worked = Float.parseFloat(parts[2]);
 
                 inventory.add(new Product(id, name, hours_worked));
+
+
             }
 
         }
@@ -66,10 +77,6 @@ public class StoreApp {
 
         return inventory;
     }
-
-
-
-
 
 
 
